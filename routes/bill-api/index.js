@@ -5,7 +5,8 @@ var mymongo = require('mymongo1610');
 // 查询账单接口 -- 待补充
 function getBill(req, res, next) {
     // 应该传入时间 通过时间返回相对应的账单 
-    mymongo.find('bill_list', (err, result) => {
+    var uid = req.body.uid;
+    mymongo.find('bill_list', { uid: uid }, (err, result) => {
         if (err) {
             res.json({ code: 0, msg: err });
         } else {
