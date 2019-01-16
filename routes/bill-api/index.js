@@ -51,8 +51,27 @@ function delBill(req, res, next) {
     });
 };
 
+// 搜索账单接口
+function searchBill(req, res, next) {
+    var intro = req.body.intro;
+    if (intro === '') {
+        res.json({ code: 3, msg: '请输入查询内容' });
+    } else {
+        mymongo.find('bill_list', { intro: { $regex: intro } }, (err, result) => {
+            if (err) {
+                res.json({ code: 0, msg: err });
+            } else if (result.length > 0) {
+                res.json({ code: 1, msg: '成功', data: result });
+            } else {
+                res.json({ code: 2, msg: '暂无查询信息' });
+            }
+        });
+    }
+};
+
 module.exports = {
     getBill: getBill,
     addBill: addBill,
-    delBill: delBill
+    delBill: delBill,
+    searchBill: searchBill
 }

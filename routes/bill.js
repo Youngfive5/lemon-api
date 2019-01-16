@@ -12,4 +12,6 @@ router.post('/api/addBill', billApi.addBill);
 // 删除账单接口
 router.get('/api/delBill', billApi.delBill);
 
+// 搜索账单接口
+router.post('/api/searchBill', billApi.searchBill);
 module.exports = router;
